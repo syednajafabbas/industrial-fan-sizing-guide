@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Fan Sizing &amp; Duty-Point Guide (CFM, Static Pressure &amp; 60Hz) | Cloud Electrical Co.</title>
+  <meta name="description" content="Practical engineering guide for MEP contractors and facility buyers in Saudi Arabia: calculate CFM, convert m³/h and L/s, account for static pressure, and size 60Hz industrial exhaust fans accurately.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical & Hreflang for GitHub Pages -->
+  <link rel="canonical" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/">
+  <link rel="alternate" hreflang="en" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/">
+  <link rel="alternate" hreflang="ar" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/ar/">
+  <link rel="alternate" hreflang="x-default" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Industrial Fan Sizing &amp; Duty-Point Guide (CFM, Static Pressure &amp; 60Hz)">
+  <meta property="og:description" content="Interactive CFM/ACH calculator, static pressure breakdown, and 60Hz Saudi power selection guide for industrial and commercial exhaust fans.">
+  <meta property="og:url" content="https://syednajafabbas.github.io/industrial-fan-sizing-guide/">
+  <meta property="og:image" content="https://www.cloudventsa.com/assets/brand/logo-light-640.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="./assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.cloudventsa.com/#organization",
+        "name": "Cloud Electrical Co.",
+        "legalName": "Sahab Al Kahraba Trading Establishment",
+        "url": "https://www.cloudventsa.com/",
+        "logo": "https://www.cloudventsa.com/assets/brand/logo-light-640.webp",
+        "telephone": "+966562598137",
+        "email": "sales@cloudventsa.com",
+        "taxID": "311357535300003",
+        "identifier": [
+          { "@type": "PropertyValue", "name": "Commercial Registration (CR)", "value": "1010814785" },
+          { "@type": "PropertyValue", "name": "Unified National Number", "value": "7030019405" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "8035 Al Adel Al Waidh, Al Amal District",
+          "addressLocality": "Riyadh",
+          "postalCode": "12643",
+          "addressCountry": "SA"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Saudi Arabia"
+        },
+        "sameAs": [
+          "https://www.facebook.com/cloudelectricalsa",
+          "https://www.instagram.com/cloudelectricalsa/",
+          "https://www.linkedin.com/company/cloudelectricalsa",
+          "https://pinterest.com/cloudelectricalsa/",
+          "https://x.com/cloudventsa"
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "Industrial Fan Sizing & Duty-Point Guide (CFM, Static Pressure & 60Hz)",
+        "description": "Engineering guide and interactive calculator for sizing industrial exhaust fans by airflow (CFM, m³/h, L/s), static pressure (Pa, in. wg), and 60Hz Saudi electrical supply.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://www.cloudventsa.com/#organization" },
+        "about": [
+          "Cubic feet per minute (CFM)",
+          "Static pressure",
+          "Industrial ventilation",
+          "60Hz HVAC fan selection"
+        ],
+        "citation": [
+          "https://en.wikipedia.org/wiki/Cubic_foot",
+          "https://en.wikipedia.org/wiki/Actual_cubic_feet_per_minute",
+          "https://en.wikipedia.org/wiki/Standard_cubic_feet_per_minute"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why is free-air CFM misleading when selecting an exhaust fan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Free-air CFM is measured at zero static pressure (0 Pa / 0 in. wg) with no ducts, grilles, dampers, or filters attached. Once installed in a ducted system or behind louvers and grease filters, system resistance reduces actual delivered airflow. Always verify CFM at your project's required static pressure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you convert CFM to m³/h and L/s?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Multiply CFM by 1.699 to get cubic meters per hour (m³/h), or multiply CFM by 0.47195 to get liters per second (L/s). Conversely, divide m³/h by 1.699 to obtain CFM."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does 60Hz electrical frequency in Saudi Arabia matter for fan performance?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Saudi Arabia operates on a 60Hz power grid (typically 220-240V single-phase or 380-400V three-phase). A fan curve published at 50Hz runs at a different synchronous motor speed than at 60Hz. Running an unrated 50Hz fan at 60Hz increases RPM by ~20%, which raises power draw sharply by the cube law and can overload the motor."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What information should contractors send for a fast fan quotation in Saudi Arabia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Provide required airflow (CFM or m³/h), estimated static pressure (Pa or in. wg), mounting type (roof, wall, inline duct, or floor), duct or opening dimensions, application (general air, kitchen grease, warehouse heat, or smoke), voltage/phase (220V 1Ph or 380V 3Ph 60Hz), and delivery city."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body id="top">
+
+  <!-- Top Utility Bar -->
+  <div class="utility-bar">
+    <div class="container utility-bar__inner">
+      <div>Al Amal, Riyadh, Saudi Arabia &middot; B2B Supply Across Saudi Arabia</div>
+      <div class="utility-bar__links">
+        <a href="https://wa.me/966562598137" target="_blank" rel="noopener">Project Support</a>
+        <a href="tel:+966562598137">+966 56 259 8137</a>
+        <a href="mailto:sales@cloudventsa.com">sales@cloudventsa.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand-link" href="https://www.cloudventsa.com/" target="_blank" rel="noopener" aria-label="Cloud Electrical Co. Official Website">
+        <img class="brand-logo" src="https://www.cloudventsa.com/assets/brand/logo-light-640.webp" alt="Cloud Electrical Co. — We Move Air" width="180" height="44">
+      </a>
+
+      <nav class="site-nav" aria-label="Guide Sections">
+        <a href="#calculator">CFM Calculator</a>
+        <a href="#cfm-guide">CFM &amp; Conversions</a>
+        <a href="#static-pressure">Static Pressure</a>
+        <a href="#saudi-60hz">60Hz KSA Power</a>
+        <a href="#fan-selector">Fan Selector</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-lang" href="./ar/" hreflang="ar" lang="ar">العربية</a>
+        <a class="btn btn-secondary" href="tel:+966562598137">Call Now</a>
+        <a class="btn btn-primary" href="https://wa.me/966562598137" target="_blank" rel="noopener">WhatsApp Sales</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="badge">MEP Engineering &amp; Procurement Resource</span>
+          <h1>Industrial Fan Sizing &amp; Duty-Point Guide (CFM, Static Pressure &amp; 60Hz)</h1>
+          <p class="hero__lead">
+            Selecting an exhaust fan solely by its "free-air" label is the most common reason commercial and industrial ventilation systems underperform. Use this field guide and interactive calculator—prepared for engineers, mechanical contractors, and facility teams across Saudi Arabia—to size airflow accurately and specify a verifiable duty point.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="#calculator">Launch CFM &amp; Duty Calculator</a>
+            <a class="btn btn-secondary" href="https://www.cloudventsa.com/" target="_blank" rel="noopener">Browse Cloud Electrical Catalog</a>
+          </div>
+        </div>
+
+        <aside class="hero__card" aria-label="Key Sizing Rules">
+          <h2>4 Rules Before Ordering Any Industrial Fan</h2>
+          <ul>
+            <li><strong>Never buy on free-air CFM alone:</strong> Always ask for airflow at your system's actual static pressure (Pa or in. wg).</li>
+            <li><strong>Match Saudi 60Hz power:</strong> Confirm 220–240V 1-phase or 380–400V 3-phase at <strong>60Hz</strong> on the fan curve and motor nameplate.</li>
+            <li><strong>Pick impeller geometry by resistance:</strong> Axial fans handle high volume at low pressure; centrifugal blowers overcome ducting and grease filters.</li>
+            <li><strong>Include a realistic margin:</strong> Account for duct leakage, dirty filters, and future balancing dampers (typically 10–15%).</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Interactive CFM Calculator & Unit Converter -->
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section__header">
+          <h2>Interactive CFM, Air-Change (ACH) &amp; Static Pressure Estimator</h2>
+          <p>Enter your space dimensions, select the application preset, and choose your duct configuration to estimate required airflow and static pressure band.</p>
+        </div>
+
+        <div class="calc-layout">
+          <div class="card">
+            <form class="form-grid" onsubmit="return false;">
+              <div class="form-group">
+                <label for="unitSystem">Dimension Units</label>
+                <select id="unitSystem" class="form-control">
+                  <option value="m" selected>Meters (m)</option>
+                  <option value="ft">Feet (ft)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="appPreset">Application Preset (Typical ACH)</label>
+                <select id="appPreset" class="form-control">
+                  <option value="warehouse" selected>Warehouse / Logistics (10 ACH)</option>
+                  <option value="factory">Factory / Heat Workshop (18 ACH)</option>
+                  <option value="kitchen">Commercial Kitchen / Hood (30 ACH)</option>
+                  <option value="washroom">Commercial Washroom (12 ACH)</option>
+                  <option value="office">Office / Retail Space (6 ACH)</option>
+                  <option value="electrical">Electrical / Mechanical Room (20 ACH)</option>
+                  <option value="poultry">Poultry / Greenhouse Tunnel (40 ACH)</option>
+                  <option value="confined">Confined Space / Construction (25 ACH)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="roomLength">Length <span data-dim-unit>(m)</span></label>
+                <input id="roomLength" type="number" class="form-control tabular" value="20" min="0.5" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label for="roomWidth">Width <span data-dim-unit>(m)</span></label>
+                <input id="roomWidth" type="number" class="form-control tabular" value="12" min="0.5" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label for="roomHeight">Ceiling Height <span data-dim-unit>(m)</span></label>
+                <input id="roomHeight" type="number" class="form-control tabular" value="5" min="1" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label for="customAch">Air Changes per Hour (ACH)</label>
+                <input id="customAch" type="number" class="form-control tabular" value="10" min="1" max="120" step="1">
+              </div>
+
+              <div class="form-group">
+                <label for="ductType">Ducting &amp; Resistance Profile</label>
+                <select id="ductType" class="form-control">
+                  <option value="free">Free-discharge (Wall shutter / Roof curb)</option>
+                  <option value="short" selected>Short duct (&lt; 10 m, 1–2 elbows)</option>
+                  <option value="medium">Medium duct network (branches + grilles)</option>
+                  <option value="high">High static (Kitchen hood / filters / long run)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="safetyMargin">Design / Leakage Margin (%)</label>
+                <input id="safetyMargin" type="number" class="form-control tabular" value="10" min="0" max="50" step="5">
+              </div>
+            </form>
+
+            <div class="note-box">
+              <strong>Engineering Note:</strong> ACH presets provide a preliminary volumetric estimate. Commercial kitchens (hood capture velocity), process fumes, and heat-load calculations should always be verified against ASHRAE / project MEP schedules.
+            </div>
+          </div>
+
+          <div class="results-panel" aria-live="polite">
+            <h3>Calculated Preliminary Duty Point</h3>
+            <div class="kpi-grid">
+              <div class="kpi-box kpi-box--highlight">
+                <span class="kpi-box__label">Design Airflow (CFM)</span>
+                <span id="outCfm" class="kpi-box__value tabular">—</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-box__label">Metric Airflow (m³/h)</span>
+                <span id="outM3h" class="kpi-box__value tabular">—</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-box__label">Flow Rate (L/s)</span>
+                <span id="outLs" class="kpi-box__value tabular">—</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-box__label">Space Volume</span>
+                <span id="outVolume" class="kpi-box__value tabular">—</span>
+              </div>
+            </div>
+
+            <div class="rec-box">
+              <strong>Estimated Static Pressure Band:</strong><br>
+              <span id="outPressure" class="tabular">—</span>
+            </div>
+
+            <div class="rec-box">
+              <strong>Recommended Cloud Electrical Categories:</strong>
+              <div id="recLinks" class="rec-links"></div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <a id="waQuoteBtn" class="btn btn-primary" href="https://wa.me/966562598137" target="_blank" rel="noopener">Send Duty Point via WhatsApp</a>
+              <button id="copySpecBtn" type="button" class="btn btn-secondary">Copy Spec Summary</button>
+            </div>
+            <div id="copyFeedback" class="copy-feedback" role="status"></div>
+          </div>
+        </div>
+
+        <!-- Quick Unit Converter -->
+        <div class="card" style="margin-top:24px;">
+          <h3>Quick Airflow &amp; Static Pressure Unit Converter</h3>
+          <div class="grid-2">
+            <div>
+              <p style="margin-top:0; color:var(--ink-muted); font-size:0.92rem;">Type into any airflow box to convert instantaneously:</p>
+              <div class="grid-3">
+                <div class="form-group">
+                  <label for="convCfm">CFM (ft³/min)</label>
+                  <input id="convCfm" type="number" class="form-control tabular" value="1000" step="any">
+                </div>
+                <div class="form-group">
+                  <label for="convM3h">m³/h</label>
+                  <input id="convM3h" type="number" class="form-control tabular" value="1699.0" step="any">
+                </div>
+                <div class="form-group">
+                  <label for="convLs">L/s</label>
+                  <input id="convLs" type="number" class="form-control tabular" value="471.9" step="any">
+                </div>
+              </div>
+            </div>
+            <div>
+              <p style="margin-top:0; color:var(--ink-muted); font-size:0.92rem;">Type into either static pressure box to convert:</p>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="convPa">Pascals (Pa)</label>
+                  <input id="convPa" type="number" class="form-control tabular" value="250" step="any">
+                </div>
+                <div class="form-group">
+                  <label for="convInwg">Inches Water Gauge (in. wg)</label>
+                  <input id="convInwg" type="number" class="form-control tabular" value="1.00" step="any">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Understanding CFM & Conversions -->
+    <section class="section section--alt" id="cfm-guide">
+      <div class="container">
+        <div class="section__header">
+          <h2>What Is CFM and How Do You Size It Properly?</h2>
+          <p>Understanding volumetric flow rate, standard vs. actual airflow, and exact metric conversions used in Saudi MEP schedules.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>CFM Definition &amp; Wikipedia Reference</h3>
+            <p>
+              <strong>CFM (Cubic Feet per Minute)</strong> is a non-metric unit of volumetric flow rate representing the volume of air (in cubic feet) moving past a cross-section every minute. For the underlying definition and unit background, refer to the
+              <a href="https://en.wikipedia.org/wiki/Cubic_foot" target="_blank" rel="noopener noreferrer">Cubic foot per minute (CFM) reference on Wikipedia</a>.
+            </p>
+            <p>
+              In industrial ventilation, engineers also distinguish between
+              <a href="https://en.wikipedia.org/wiki/Actual_cubic_feet_per_minute" target="_blank" rel="noopener noreferrer">ACFM (Actual Cubic Feet per Minute)</a>
+              at real site temperature and pressure versus
+              <a href="https://en.wikipedia.org/wiki/Standard_cubic_feet_per_minute" target="_blank" rel="noopener noreferrer">SCFM (Standard Cubic Feet per Minute)</a>
+              normalized to standard air density (1.2 kg/m³ at 20°C and sea level). In hot Saudi ambient environments (45–50°C on rooftops), air density drops—affecting mass flow and motor cooling—so always review manufacturer temperature limits.
+            </p>
+            <div class="formula-bar">
+              CFM = (Room Volume in ft³ &times; ACH) &divide; 60<br>
+              m&sup3;/h = Room Volume in m&sup3; &times; ACH<br>
+              1 CFM = 1.699 m&sup3;/h = 0.47195 L/s
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Quick Conversion Reference Table</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>CFM (ft³/min)</th>
+                    <th>m³/h</th>
+                    <th>L/s</th>
+                    <th>Typical Application</th>
+                  </tr>
+                </thead>
+                <tbody class="tabular">
+                  <tr>
+                    <td>150 CFM</td>
+                    <td>255 m³/h</td>
+                    <td>71 L/s</td>
+                    <td>Single washroom / small office duct (<a href="https://www.cloudventsa.com/bathroom-exhaust-fan" target="_blank" rel="noopener">Bathroom</a> / <a href="https://www.cloudventsa.com/kdk-exhaust-fan" target="_blank" rel="noopener">KDK</a>)</td>
+                  </tr>
+                  <tr>
+                    <td>500 CFM</td>
+                    <td>850 m³/h</td>
+                    <td>236 L/s</td>
+                    <td>Commercial pantry or ducted room (<a href="https://www.cloudventsa.com/inline-fan" target="_blank" rel="noopener">Inline Duct</a>)</td>
+                  </tr>
+                  <tr>
+                    <td>2,000 CFM</td>
+                    <td>3,398 m³/h</td>
+                    <td>944 L/s</td>
+                    <td>Workshop bay or small kitchen hood (<a href="https://www.cloudventsa.com/wall-mounted-fan" target="_blank" rel="noopener">Wall Shutter</a>)</td>
+                  </tr>
+                  <tr>
+                    <td>5,000 CFM</td>
+                    <td>8,495 m³/h</td>
+                    <td>2,360 L/s</td>
+                    <td>Restaurant kitchen hood (<a href="https://www.cloudventsa.com/roof-fan/upblast-roof-fan" target="_blank" rel="noopener">RCU Upblast Roof Fan</a>)</td>
+                  </tr>
+                  <tr>
+                    <td>12,000 CFM</td>
+                    <td>20,388 m³/h</td>
+                    <td>5,663 L/s</td>
+                    <td>Industrial factory / warehouse roof (<a href="https://www.cloudventsa.com/roof-fan/downblast-roof-fan" target="_blank" rel="noopener">RCD</a> / <a href="https://www.cloudventsa.com/roof-fan/axial-roof-fan" target="_blank" rel="noopener">DWT</a>)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Static Pressure & Duty Point -->
+    <section class="section" id="static-pressure">
+      <div class="container">
+        <div class="section__header">
+          <h2>Static Pressure &amp; The Fan Duty Point</h2>
+          <p>Why two fans with the same "maximum CFM" perform completely differently once connected to ductwork, louvers, or grease filters.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="diagram-wrap">
+            <h3 style="margin-top:0;">Fan Curve vs. System Resistance Curve</h3>
+            <svg viewBox="0 0 520 300" role="img" aria-label="Graph showing Fan Curve intersecting System Resistance Curve at the Duty Point versus Free-Air CFM" style="width:100%; height:auto; display:block;">
+              <rect x="0" y="0" width="520" height="300" fill="#ffffff"/>
+              <!-- Axes -->
+              <line x1="60" y1="250" x2="490" y2="250" stroke="#0f172a" stroke-width="2"/>
+              <line x1="60" y1="25" x2="60" y2="250" stroke="#0f172a" stroke-width="2"/>
+              <!-- Grid -->
+              <line x1="60" y1="190" x2="490" y2="190" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+              <line x1="60" y1="130" x2="490" y2="130" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+              <line x1="60" y1="70" x2="490" y2="70" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+              <!-- Fan Curve (Red) -->
+              <path d="M 60 55 C 165 62, 315 118, 445 250" fill="none" stroke="#d9251d" stroke-width="3.5"/>
+              <!-- System Resistance Curve (Slate) -->
+              <path d="M 60 250 Q 250 232, 415 55" fill="none" stroke="#0f172a" stroke-width="3" stroke-dasharray="7 5"/>
+              <!-- Duty Point Intersection (~286, 137) -->
+              <line x1="286" y1="137" x2="286" y2="250" stroke="#94a3b8" stroke-dasharray="3 3"/>
+              <line x1="60" y1="137" x2="286" y2="137" stroke="#94a3b8" stroke-dasharray="3 3"/>
+              <circle cx="286" cy="137" r="7" fill="#d9251d" stroke="#ffffff" stroke-width="2"/>
+              <!-- Free-Air Point -->
+              <circle cx="445" cy="250" r="6" fill="#0f172a"/>
+              <!-- Labels -->
+              <text x="275" y="280" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="600">Airflow (CFM or m³/h)</text>
+              <text x="22" y="140" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="600" transform="rotate(-90 22 140)">Static Pressure (Pa / in. wg)</text>
+              <text x="298" y="128" font-size="12" fill="#d9251d" font-weight="700">Actual Duty Point</text>
+              <text x="298" y="144" font-size="11" fill="#475569">(Real CFM @ Static Pressure)</text>
+              <text x="415" y="236" text-anchor="middle" font-size="11" fill="#0f172a" font-weight="700">Free-Air (0 Pa)</text>
+              <text x="125" y="50" font-size="12" fill="#d9251d" font-weight="600">Fan Performance Curve</text>
+              <text x="348" y="62" font-size="11" fill="#0f172a" font-weight="600">System Curve (&Delta;P &prop; Q&sup2;)</text>
+            </svg>
+          </div>
+
+          <div class="card">
+            <h3>Where Static Pressure Loss Comes From</h3>
+            <p>
+              <strong>Static pressure</strong> is the resistance a fan must push or pull against, measured in <strong>Pascals (Pa)</strong> or <strong>inches of water gauge (in. wg)</strong> where <code>1 in. wg &approx; 249 Pa</code>. As ductwork gets longer or narrower, system resistance climbs with the <em>square</em> of airflow.
+            </p>
+            <ul>
+              <li><strong>Wall shutters &amp; backdraft dampers:</strong> typically add 20–50 Pa.</li>
+              <li><strong>Straight galvanized ducting:</strong> ~1–3 Pa per meter at typical velocities (6–10 m/s).</li>
+              <li><strong>90&deg; elbows, transitions &amp; weather hoods:</strong> 25–75 Pa per fitting depending on radius.</li>
+              <li><strong>Baffle grease filters &amp; kitchen hoods:</strong> 125–300+ Pa (increasing as grease builds up).</li>
+              <li><strong>Bag / HEPA / pre-filters:</strong> 100–400+ Pa between clean and dirty conditions.</li>
+            </ul>
+            <p style="margin-bottom:0;">
+              For ducted runs above 150 Pa, choose backward-curved centrifugal units like the
+              <a href="https://www.cloudventsa.com/roof-fan/centrifugal-roof-fan" target="_blank" rel="noopener">RC-A Centrifugal Roof Fan</a>,
+              <a href="https://www.cloudventsa.com/inline-fan/centrifugal-box-inline-fan" target="_blank" rel="noopener">CHA Centrifugal Box Inline Fan</a>, or
+              <a href="https://www.cloudventsa.com/centrifugal-blower" target="_blank" rel="noopener">DE / CBA Centrifugal Blowers</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 60Hz Saudi Power & Drive Selection -->
+    <section class="section section--alt" id="saudi-60hz">
+      <div class="container">
+        <div class="section__header">
+          <h2>60Hz Electrical Supply &amp; Drive Selection in Saudi Arabia</h2>
+          <p>Avoiding motor overloads and curve mismatches when specifying industrial fans on KSA commercial and industrial grids.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. Frequency (60Hz vs. 50Hz)</h3>
+            <p>
+              Saudi Arabia uses <strong>60Hz</strong> utility power. Because induction motor speed scales with frequency, a 4-pole motor runs near ~1,750 RPM at 60Hz versus ~1,450 RPM at 50Hz. By the fan affinity laws, a 20% speed jump increases airflow by 20%, static pressure by 44%, and <strong>brake horsepower by ~73%</strong>. Never install a 50Hz-only fan directly on 60Hz without factory 60Hz curve verification.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>2. Voltage &amp; Phase in KSA</h3>
+            <p>
+              Standard Saudi commercial/industrial supplies are <strong>220–240V Single-Phase (1Ph, 60Hz)</strong> for smaller ceiling, inline, and light wall fans (such as <a href="https://www.cloudventsa.com/kdk-exhaust-fan" target="_blank" rel="noopener">KDK</a> and <a href="https://www.cloudventsa.com/tat-exhaust-fan" target="_blank" rel="noopener">TAT</a>), and <strong>380–400V Three-Phase (3Ph, 60Hz)</strong> for larger roof exhaust fans, industrial blowers, and high-static units.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>3. Direct-Drive vs. Belt-Drive</h3>
+            <p>
+              <strong>Direct-drive fans</strong> have fewer wear parts (no belts or pulleys to tension in high rooftop heat) and pair cleanly with VFDs/speed controllers where rated. <strong>Belt-drive units</strong> allow pulley ratio changes to fine-tune CFM during Testing &amp; Commissioning (T&amp;C) and keep the motor out of hot or greasy airstreams.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Fan Type Selector -->
+    <section class="section" id="fan-selector">
+      <div class="container">
+        <div class="section__header">
+          <h2>Interactive Duty-Point Fan Type Selector</h2>
+          <p>Narrow down the right industrial or commercial fan series from Cloud Electrical Co. based on mounting, airstream condition, and Saudi power supply.</p>
+        </div>
+
+        <div class="calc-layout">
+          <div class="card">
+            <div class="form-grid">
+              <div class="form-group form-group--full">
+                <label for="selMount">1. Installation / Mounting Location</label>
+                <select id="selMount" class="form-control">
+                  <option value="roof" selected>Rooftop Curb Exhaust</option>
+                  <option value="wall">Exterior Wall Opening</option>
+                  <option value="inline">Inside Ductwork (Ceiling Void / Plant Room)</option>
+                  <option value="ceiling">Ceiling Grid / High-Bay Overhead</option>
+                  <option value="industrial">Floor / Skid High-Static Process Duct</option>
+                  <option value="portable">Mobile / Temporary Confined Space</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="selEnv">2. Airstream &amp; Resistance</label>
+                <select id="selEnv" class="form-control">
+                  <option value="general" selected>Clean / General Exhaust</option>
+                  <option value="highstatic">Ducted / High Static Pressure</option>
+                  <option value="grease">Commercial Kitchen Grease / Vapors</option>
+                  <option value="dust">Warehouse Heat / Dust / Poultry</option>
+                  <option value="smoke">High-Temp / Smoke Extraction</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="selPower">3. Available Power Supply (KSA 60Hz)</label>
+                <select id="selPower" class="form-control">
+                  <option value="3ph" selected>380–400V, 3-Phase, 60Hz</option>
+                  <option value="1ph">220–240V, 1-Phase, 60Hz</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-panel" aria-live="polite">
+            <h3>Recommended Series</h3>
+            <div class="rec-box">
+              <strong id="selTitle" style="font-size:1.08rem; color:#fca5a5;">—</strong>
+              <p id="selDesc" style="margin:8px 0 0; color:#cbd5e1;">—</p>
+            </div>
+            <a id="selLink" class="btn btn-primary" href="https://www.cloudventsa.com/roof-fan" target="_blank" rel="noopener">View Matching Models on Cloudventsa &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submittal & BOQ Checklist -->
+    <section class="section section--alt" id="checklist">
+      <div class="container">
+        <div class="section__header">
+          <h2>MEP Submittal &amp; RFQ Checklist for Fast Quotations</h2>
+          <p>Include these 6 items when requesting datasheets, fan curves, or pricing from Cloud Electrical Co. in Riyadh.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. Required Airflow</h3>
+            <p>State target airflow in <strong>CFM</strong> or <strong>m³/h</strong> (or room dimensions + ACH if you need duty sizing verification).</p>
+          </div>
+          <div class="card">
+            <h3>2. External Static Pressure</h3>
+            <p>Provide static pressure in <strong>Pa</strong> or <strong>in. wg</strong>, or share duct length, bends, louvers, and filter stages.</p>
+          </div>
+          <div class="card">
+            <h3>3. Application &amp; Airstream</h3>
+            <p>Clarify whether air is ambient/clean, hot warehouse air, commercial kitchen grease, washroom moisture, or smoke extraction.</p>
+          </div>
+          <div class="card">
+            <h3>4. Mounting &amp; Opening Size</h3>
+            <p>Specify roof curb, wall opening (mm/inch), circular/rectangular duct diameter, or ceiling tile cutout.</p>
+          </div>
+          <div class="card">
+            <h3>5. Electrical Rating (60Hz)</h3>
+            <p>Confirm 220–240V 1-Phase or 380–400V 3-Phase at <strong>60Hz</strong>, plus any IP/explosion-proof or VFD requirements.</p>
+          </div>
+          <div class="card">
+            <h3>6. Quantity &amp; KSA City</h3>
+            <p>Share BOQ quantity and site location (Riyadh, Jeddah, Dammam, Khobar, Jubail, Yanbu, Makkah, Madinah, or regional site).</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>Need Technical Submittals or BOQ Pricing?</strong> Send your fan schedule directly to Cloud Electrical Co. via
+          <a href="https://www.cloudventsa.com/contact" target="_blank" rel="noopener">our online contact form</a>,
+          <a href="https://wa.me/966562598137" target="_blank" rel="noopener">WhatsApp Sales (+966 56 259 8137)</a>, or email <a href="mailto:sales@cloudventsa.com">sales@cloudventsa.com</a>.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__header">
+          <h2>Frequently Asked Questions on Fan Sizing</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Why is free-air CFM misleading when selecting an exhaust fan?</summary>
+            <p>Free-air CFM is measured at zero static pressure (0 Pa / 0 in. wg) with no ducts, grilles, dampers, or filters attached. Once installed in a ducted system or behind louvers and grease filters, system resistance reduces actual delivered airflow. Always verify CFM at your project's required static pressure.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do you convert CFM to m³/h and L/s?</summary>
+            <p>Multiply CFM by <code>1.699</code> to get cubic meters per hour (m³/h), or multiply CFM by <code>0.47195</code> to get liters per second (L/s). Conversely, divide m³/h by <code>1.699</code> to obtain CFM.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Why does 60Hz electrical frequency in Saudi Arabia matter for fan performance?</summary>
+            <p>Saudi Arabia operates on a 60Hz power grid (typically 220–240V single-phase or 380–400V three-phase). A fan curve published at 50Hz runs at a different synchronous motor speed than at 60Hz. Running an unrated 50Hz fan at 60Hz increases RPM by ~20%, which raises power draw sharply by the cube law and can overload the motor.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Should I use an upblast or downblast roof fan for a commercial kitchen?</summary>
+            <p>Always use a grease-rated upblast centrifugal roof fan (such as the <a href="https://www.cloudventsa.com/roof-fan/upblast-roof-fan" target="_blank" rel="noopener">RCU Upblast Roof Fan</a>). Upblast units discharge hot, grease-laden air vertically away from the roof membrane and include drainage/curb features, whereas downblast units direct exhaust downward onto the roof.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>What information should contractors send for a fast fan quotation in Saudi Arabia?</summary>
+            <p>Provide required airflow (CFM or m³/h), estimated static pressure (Pa or in. wg), mounting type (roof, wall, inline duct, or floor), duct or opening dimensions, application (general air, kitchen grease, warehouse heat, or smoke), voltage/phase (220V 1Ph or 380V 3Ph 60Hz), and delivery city.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- References & Authority -->
+    <section class="section section--alt" id="references">
+      <div class="container">
+        <div class="card">
+          <h2 style="margin-top:0;">Technical References &amp; Official Supplier Credentials</h2>
+          <ul>
+            <li><strong>CFM Definition &amp; Flow Rate Standards:</strong> <a href="https://en.wikipedia.org/wiki/Cubic_foot" target="_blank" rel="noopener noreferrer">Cubic foot per minute (CFM) — Wikipedia</a>, <a href="https://en.wikipedia.org/wiki/Actual_cubic_feet_per_minute" target="_blank" rel="noopener noreferrer">ACFM — Wikipedia</a>, and <a href="https://en.wikipedia.org/wiki/Standard_cubic_feet_per_minute" target="_blank" rel="noopener noreferrer">SCFM — Wikipedia</a>.</li>
+            <li><strong>Supplier Entity:</strong> Cloud Electrical Co. (Trading brand of <strong>Sahab Al Kahraba Trading Establishment</strong>) &middot; 20+ years of B2B air-movement supply experience across Saudi Arabia.</li>
+            <li><strong>Official Saudi Registrations:</strong> Commercial Registration (CR): <a href="https://mc.gov.sa/EN/ESERVICES/pages/ServiceDetails.aspx?sID=91" target="_blank" rel="noopener noreferrer">1010814785</a> &middot; VAT ID: <a href="https://zatca.gov.sa/en/eServices/Pages/eservices-007.aspx" target="_blank" rel="noopener noreferrer">311357535300003</a> &middot; Unified National Number: 7030019405.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dark Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Cloud Electrical Co.</h3>
+          <p style="margin:0 0 10px;">B2B supplier of industrial exhaust fans, commercial ventilation equipment, and HVAC air-movement products across Saudi Arabia.</p>
+          <p style="margin:0; font-size:0.84rem; color:var(--ink-light);">
+            Sahab Al Kahraba Trading Establishment<br>
+            CR: 1010814785 &middot; VAT: 311357535300003
+          </p>
+        </div>
+
+        <div>
+          <h3>Key Fan Categories</h3>
+          <ul>
+            <li><a href="https://www.cloudventsa.com/roof-fan" target="_blank" rel="noopener">Roof Exhaust Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/wall-mounted-fan" target="_blank" rel="noopener">Wall Mounted Exhaust Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/inline-fan" target="_blank" rel="noopener">Inline Duct Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/centrifugal-blower" target="_blank" rel="noopener">Centrifugal Blowers</a></li>
+            <li><a href="https://www.cloudventsa.com/hvls-ceiling-fan" target="_blank" rel="noopener">HVLS Ceiling Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/kitchen-exhaust-fan" target="_blank" rel="noopener">Kitchen Exhaust Fans</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Brands &amp; Resources</h3>
+          <ul>
+            <li><a href="https://www.cloudventsa.com/fresh-air-fan" target="_blank" rel="noopener">Fresh Air Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/portable-exhaust-fan" target="_blank" rel="noopener">Portable Exhaust Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/kdk-exhaust-fan" target="_blank" rel="noopener">KDK Exhaust Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/tat-exhaust-fan" target="_blank" rel="noopener">TAT Exhaust Fans</a></li>
+            <li><a href="https://www.cloudventsa.com/about-us" target="_blank" rel="noopener">About Cloud Electrical</a></li>
+            <li><a href="./ar/">النسخة العربية (Arabic Guide)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Riyadh Head Office</h3>
+          <ul>
+            <li>8035 Al Adel Al Waidh, Al Amal District, Riyadh 12643, KSA</li>
+            <li><a href="tel:+966562598137">+966 56 259 8137</a></li>
+            <li><a href="mailto:sales@cloudventsa.com">sales@cloudventsa.com</a></li>
+            <li>
+              <a href="https://www.linkedin.com/company/cloudelectricalsa" target="_blank" rel="noopener">LinkedIn</a> &middot;
+              <a href="https://www.facebook.com/cloudelectricalsa" target="_blank" rel="noopener">Facebook</a> &middot;
+              <a href="https://www.instagram.com/cloudelectricalsa/" target="_blank" rel="noopener">Instagram</a> &middot;
+              <a href="https://x.com/cloudventsa" target="_blank" rel="noopener">X</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Cloud Electrical Co. (Sahab Al Kahraba Trading Establishment).</span>
+        <span><a href="#top">Back to top &uarr;</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/calculator.js"></script>
+</body>
+</html>

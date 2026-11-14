@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دليل تحديد مقاس المراوح الصناعية ونقطة التشغيل (CFM، الضغط الساكن، 60 هرتز) | سحابة الكهرباء</title>
+  <meta name="description" content="دليل هندسي وحاسبة تفاعلية لمقاولي الميكانيكا ومهندسي التكييف في السعودية: حساب معدل التدفق CFM والتحويل إلى م³/ساعة، فهم الضغط الساكن، واختيار مراوح الشفط بتردد 60 هرتز.">
+  <meta name="robots" content="index, follow">
+
+  <!-- روابط canonical و hreflang لصفحة GitHub Pages -->
+  <link rel="canonical" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/ar/">
+  <link rel="alternate" hreflang="ar" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/ar/">
+  <link rel="alternate" hreflang="en" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/">
+  <link rel="alternate" hreflang="x-default" href="https://syednajafabbas.github.io/industrial-fan-sizing-guide/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="دليل تحديد مقاس المراوح الصناعية ونقطة التشغيل (CFM، الضغط الساكن، 60 هرتز)">
+  <meta property="og:description" content="حاسبة تفاعلية لحساب CFM ومرات تغيير الهواء والضغط الساكن واختيار مراوح التهوية المناسبة لتردد 60 هرتز في السعودية.">
+  <meta property="og:url" content="https://syednajafabbas.github.io/industrial-fan-sizing-guide/ar/">
+  <meta property="og:image" content="https://www.cloudventsa.com/assets/brand/logo-light-640.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="../assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.cloudventsa.com/#organization",
+        "name": "سحابة الكهرباء",
+        "legalName": "مؤسسة سحابة الكهرباء للتجارة",
+        "url": "https://www.cloudventsa.com/ar",
+        "logo": "https://www.cloudventsa.com/assets/brand/logo-light-640.webp",
+        "telephone": "+966562598137",
+        "email": "sales@cloudventsa.com",
+        "taxID": "311357535300003",
+        "identifier": [
+          { "@type": "PropertyValue", "name": "السجل التجاري", "value": "1010814785" },
+          { "@type": "PropertyValue", "name": "الرقم الموحد", "value": "7030019405" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "8035 العادل الواعظ، حي الأمل",
+          "addressLocality": "الرياض",
+          "postalCode": "12643",
+          "addressCountry": "SA"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "المملكة العربية السعودية"
+        },
+        "sameAs": [
+          "https://www.facebook.com/cloudelectricalsa",
+          "https://www.instagram.com/cloudelectricalsa/",
+          "https://www.linkedin.com/company/cloudelectricalsa",
+          "https://pinterest.com/cloudelectricalsa/",
+          "https://x.com/cloudventsa"
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "دليل تحديد مقاس المراوح الصناعية ونقطة التشغيل (CFM، الضغط الساكن، 60 هرتز)",
+        "description": "دليل هندسي وحاسبة تفاعلية لتحديد مقاس مراوح الشفط الصناعية والتجارية في السعودية حسب التدفق والضغط الساكن وتردد 60 هرتز.",
+        "inLanguage": "ar",
+        "publisher": { "@id": "https://www.cloudventsa.com/#organization" },
+        "citation": [
+          "https://ar.wikipedia.org/wiki/%D9%85%D8%B9%D8%AF%D9%84_%D8%A7%D9%84%D8%AA%D8%AF%D9%81%D9%82_%D8%A7%D9%84%D8%AD%D8%AC%D9%85%D9%8A",
+          "https://en.wikipedia.org/wiki/Cubic_foot"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "لماذا يُعد رقم التدفق الحر (Free-Air CFM) مضللاً عند اختيار مروحة الشفط؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "التدفق الحر يُقاس عند ضغط ساكن يساوي صفراً بدون أي مجاري هواء (دكت) أو شترات أو فلاتر. عند تركيب المروحة في الموقع الفعلي، تقل كمية الهواء الخارجة بسبب مقاومة الدكت والفلاتر. لذلك يجب دائماً التحقق من التدفق عند الضغط الساكن المطلوب."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "كيف يتم تحويل وحدة CFM إلى متر مكعب في الساعة (م³/ساعة) ولتر في الثانية؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "اضرب قيمة CFM في 1.699 للحصول على متر مكعب في الساعة (م³/ساعة)، أو اضرب CFM في 0.47195 للحصول على لتر في الثانية (L/s). وللتحويل العكسي اقسم م³/ساعة على 1.699."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "لماذا يؤثر تردد الكهرباء 60 هرتز في السعودية على أداء المروحة؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تعمل شبكة الكهرباء في المملكة العربية السعودية بتردد 60 هرتز (220-240 فولت أحادي الطور أو 380-400 فولت ثلاثي الطور). تشغيل مروحة مصممة لـ 50 هرتز فقط على 60 هرتز يرفع سرعة الدوران بنحو 20% ويزيد استهلاك القدرة بنسبة قد تؤدي إلى احتراق المحرك، لذا يجب التأكد من منحنى الأداء على 60 هرتز."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body id="top">
+
+  <!-- Top Utility Bar -->
+  <div class="utility-bar">
+    <div class="container utility-bar__inner">
+      <div>حي الأمل، الرياض &middot; توريد للمشاريع في السعودية</div>
+      <div class="utility-bar__links">
+        <a href="https://wa.me/966562598137" target="_blank" rel="noopener">دعم المشاريع</a>
+        <a href="tel:+966562598137" dir="ltr">+966 56 259 8137</a>
+        <a href="mailto:sales@cloudventsa.com">sales@cloudventsa.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand-link" href="https://www.cloudventsa.com/ar" target="_blank" rel="noopener" aria-label="سحابة الكهرباء — الرئيسية">
+        <img class="brand-logo" src="https://www.cloudventsa.com/assets/brand/logo-light-640.webp" alt="شعار سحابة الكهرباء" width="180" height="44">
+      </a>
+
+      <nav class="site-nav" aria-label="أقسام الدليل">
+        <a href="#calculator">حاسبة CFM</a>
+        <a href="#cfm-guide">وحدات التدفق</a>
+        <a href="#static-pressure">الضغط الساكن</a>
+        <a href="#saudi-60hz">كهرباء 60 هرتز</a>
+        <a href="#fan-selector">اختيار المروحة</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-lang" href="../" hreflang="en" lang="en">English</a>
+        <a class="btn btn-secondary" href="tel:+966562598137">اتصل بنا</a>
+        <a class="btn btn-primary" href="https://wa.me/966562598137" target="_blank" rel="noopener">مبيعات واتساب</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <span class="badge">دليل هندسي للمقاولين ومشتري المشاريع</span>
+          <h1>دليل تحديد مقاس المراوح الصناعية ونقطة التشغيل (CFM، الضغط الساكن، 60 هرتز)</h1>
+          <p class="hero__lead">
+            اختيار مروحة الشفط بناءً على رقم «التدفق الحر» فقط هو السبب الأكثر شيوعاً لضعف السحب في المطابخ التجارية والمصانع والمستودعات. استخدم هذا الدليل العملي والحاسبة التفاعلية لحساب التدفق المطلوب وتحديد نقطة التشغيل الصحيحة لمشاريع المملكة العربية السعودية.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="#calculator">احسب مقاس المروحة الآن</a>
+            <a class="btn btn-secondary" href="https://www.cloudventsa.com/ar" target="_blank" rel="noopener">تصفّح مجموعة المنتجات</a>
+          </div>
+        </div>
+
+        <aside class="hero__card" aria-label="قواعد أساسية قبل الشراء">
+          <h2>4 قواعد أساسية قبل طلب أي مروحة صناعية</h2>
+          <ul>
+            <li><strong>لا تعتمد على التدفق الحر (Free-Air) وحده:</strong> اطلب دائماً قيمة التدفق عند الضغط الساكن الفعلي للدكت والفلاتر.</li>
+            <li><strong>تطابق تردد 60 هرتز في السعودية:</strong> تأكد من أن منحنى الأداء ولوحة المحرك يدعمان 220–240 فولت (1 فاز) أو 380–400 فولت (3 فاز) بتردد <strong>60 هرتز</strong>.</li>
+            <li><strong>اختر نوع الريشة حسب المقاومة:</strong> المراوح المحورية للتدفق العالي بدون دكت؛ ومراوح الطرد المركزي للدكت والضغط الساكن العالي.</li>
+            <li><strong>أضف هامش أمان هندسي:</strong> احتسب نسبة 10–15% لتسريب مجاري الهواء واتساخ الفلاتر مع التشغيل.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Interactive Calculator -->
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section__header">
+          <h2>حاسبة CFM ومرات تغيير الهواء (ACH) والضغط الساكن التقديري</h2>
+          <p>أدخل أبعاد المكان واختر نوع النشاط ومسار مجرى الهواء لحساب التدفق المطلوب وتحديد الفئات المناسبة.</p>
+        </div>
+
+        <div class="calc-layout">
+          <div class="card">
+            <form class="form-grid" onsubmit="return false;">
+              <div class="form-group">
+                <label for="unitSystem">وحدة القياس</label>
+                <select id="unitSystem" class="form-control">
+                  <option value="m" selected>متر (m)</option>
+                  <option value="ft">قدم (ft)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="appPreset">نوع المشروع / التطبيق (معدل ACH تقريبي)</label>
+                <select id="appPreset" class="form-control">
+                  <option value="warehouse" selected>مستودع / مركز لوجستي (10 ACH)</option>
+                  <option value="factory">مصنع / ورشة / إزالة حرارة (18 ACH)</option>
+                  <option value="kitchen">مطبخ تجاري / هود شفط (30 ACH)</option>
+                  <option value="washroom">دورات مياه تجارية (12 ACH)</option>
+                  <option value="office">مكاتب / معارض / ممرات (6 ACH)</option>
+                  <option value="electrical">غرفة كهرباء / ميكانيكا / مولدات (20 ACH)</option>
+                  <option value="poultry">مزارع دواجن / بيوت محمية (40 ACH)</option>
+                  <option value="confined">مواقع بناء / تهوية أماكن مغلقة (25 ACH)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="roomLength">الطول <span data-dim-unit>(م)</span></label>
+                <input id="roomLength" type="number" class="form-control tabular" value="20" min="0.5" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label for="roomWidth">العرض <span data-dim-unit>(م)</span></label>
+                <input id="roomWidth" type="number" class="form-control tabular" value="12" min="0.5" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label for="roomHeight">الارتفاع <span data-dim-unit>(م)</span></label>
+                <input id="roomHeight" type="number" class="form-control tabular" value="5" min="1" step="0.5">
+              </div>
+
+              <div class="form-group">
+                <label for="customAch">مرات تغيير الهواء في الساعة (ACH)</label>
+                <input id="customAch" type="number" class="form-control tabular" value="10" min="1" max="120" step="1">
+              </div>
+
+              <div class="form-group">
+                <label for="ductType">مسار الدكت والمقاومة</label>
+                <select id="ductType" class="form-control">
+                  <option value="free">طرد مباشر (جداري/سقفي بدون دكت)</option>
+                  <option value="short" selected>دكت قصير (أقل من 10 م، 1–2 كوع)</option>
+                  <option value="medium">شبكة دكت متوسطة (تفرعات + مخمد)</option>
+                  <option value="high">ضغط ساكن عالٍ (هود مطبخ / فلاتر / دكت طويل)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="safetyMargin">هامش الأمان والتسريب (%)</label>
+                <input id="safetyMargin" type="number" class="form-control tabular" value="10" min="0" max="50" step="5">
+              </div>
+            </form>
+
+            <div class="note-box">
+              <strong>ملاحظة هندسية:</strong> القيم الناتجة تقدير مبدئي للحسابات الحجمية. في المطابخ التجارية (حساب سرعة السحب على الهود) والعمليات الحرارية العالية يجب مراجعة جداول التصميم الهندسي المعتمدة.
+            </div>
+          </div>
+
+          <div class="results-panel" aria-live="polite">
+            <h3>نقطة التشغيل المبدئية المحسوبة</h3>
+            <div class="kpi-grid">
+              <div class="kpi-box kpi-box--highlight">
+                <span class="kpi-box__label">التدفق التصميمي (CFM)</span>
+                <span id="outCfm" class="kpi-box__value tabular" dir="ltr">—</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-box__label">التدفق المتري (م³/ساعة)</span>
+                <span id="outM3h" class="kpi-box__value tabular" dir="ltr">—</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-box__label">معدل التدفق (لتر/ثانية)</span>
+                <span id="outLs" class="kpi-box__value tabular" dir="ltr">—</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-box__label">حجم الفراغ</span>
+                <span id="outVolume" class="kpi-box__value tabular" dir="ltr">—</span>
+              </div>
+            </div>
+
+            <div class="rec-box">
+              <strong>نطاق الضغط الساكن التقديري:</strong><br>
+              <span id="outPressure" class="tabular" dir="ltr">—</span>
+            </div>
+
+            <div class="rec-box">
+              <strong>فئات المراوح المقترحة من سحابة الكهرباء:</strong>
+              <div id="recLinks" class="rec-links"></div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <a id="waQuoteBtn" class="btn btn-primary" href="https://wa.me/966562598137" target="_blank" rel="noopener">إرسال نقطة التشغيل عبر واتساب</a>
+              <button id="copySpecBtn" type="button" class="btn btn-secondary">نسخ المواصفات</button>
+            </div>
+            <div id="copyFeedback" class="copy-feedback" role="status"></div>
+          </div>
+        </div>
+
+        <!-- Quick Unit Converter -->
+        <div class="card" style="margin-top:24px;">
+          <h3>محوّل وحدات التدفق والضغط الساكن السريع</h3>
+          <div class="grid-2">
+            <div>
+              <p style="margin-top:0; color:var(--ink-muted); font-size:0.92rem;">اكتب في أي خانة للتحويل الفوري لوحدات تدفق الهواء:</p>
+              <div class="grid-3">
+                <div class="form-group">
+                  <label for="convCfm">CFM (قدم³/دقيقة)</label>
+                  <input id="convCfm" type="number" class="form-control tabular" dir="ltr" value="1000" step="any">
+                </div>
+                <div class="form-group">
+                  <label for="convM3h">م³/ساعة (m³/h)</label>
+                  <input id="convM3h" type="number" class="form-control tabular" dir="ltr" value="1699.0" step="any">
+                </div>
+                <div class="form-group">
+                  <label for="convLs">لتر/ثانية (L/s)</label>
+                  <input id="convLs" type="number" class="form-control tabular" dir="ltr" value="471.9" step="any">
+                </div>
+              </div>
+            </div>
+            <div>
+              <p style="margin-top:0; color:var(--ink-muted); font-size:0.92rem;">التحويل بين وحدات الضغط الساكن:</p>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="convPa">باسكال (Pa)</label>
+                  <input id="convPa" type="number" class="form-control tabular" dir="ltr" value="250" step="any">
+                </div>
+                <div class="form-group">
+                  <label for="convInwg">بوصة عمود ماء (in. wg)</label>
+                  <input id="convInwg" type="number" class="form-control tabular" dir="ltr" value="1.00" step="any">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CFM & Wikipedia Reference -->
+    <section class="section section--alt" id="cfm-guide">
+      <div class="container">
+        <div class="section__header">
+          <h2>ما هي وحدة CFM وكيف يتم حسابها؟</h2>
+          <p>شرح معدل التدفق الحجمي والفرق بين التدفق الفعلي والقياسي والتحويلات المعتمدة في جداول المشاريع.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>تعريف CFM والمرجع العلمي</h3>
+            <p>
+              تُعبّر وحدة <strong>CFM (قدم مكعب في الدقيقة — Cubic Feet per Minute)</strong> عن <a href="https://ar.wikipedia.org/wiki/%D9%85%D8%B9%D8%AF%D9%84_%D8%A7%D9%84%D8%AA%D8%AF%D9%81%D9%82_%D8%A7%D9%84%D8%AD%D8%AC%D9%85%D9%8A" target="_blank" rel="noopener noreferrer">معدل التدفق الحجمي (ويكيبيديا العربية)</a> للهواء المار عبر مقطع محدد خلال دقيقة واحدة، ويمكن الاطلاع على التعريف التفصيلي للوحدة في <a href="https://en.wikipedia.org/wiki/Cubic_foot" target="_blank" rel="noopener noreferrer">مرجع CFM / Cubic foot على ويكيبيديا</a>.
+            </p>
+            <p>
+              في التطبيقات الصناعية عالية الحرارة (مثل أسطح المباني في الرياض صيفاً عند 45–50 درجة مئوية)، يجب الانتباه إلى الفرق بين التدفق الفعلي
+              <a href="https://en.wikipedia.org/wiki/Actual_cubic_feet_per_minute" target="_blank" rel="noopener noreferrer">ACFM (ويكيبيديا)</a>
+              والتدفق القياسي
+              <a href="https://en.wikipedia.org/wiki/Standard_cubic_feet_per_minute" target="_blank" rel="noopener noreferrer">SCFM (ويكيبيديا)</a>
+              حيث تقل كثافة الهواء الساخن مما يتطلب التحقق من قدرة تبريد المحرك وتحمّل الحرارة.
+            </p>
+            <div class="formula-bar" dir="ltr">
+              CFM = (Room Volume ft³ × ACH) / 60<br>
+              m³/h = Room Volume m³ × ACH<br>
+              1 CFM = 1.699 m³/h = 0.47195 L/s
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>جدول تحويل سريع لأبرز التطبيقات</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>التدفق (CFM)</th>
+                    <th>م³/ساعة</th>
+                    <th>لتر/ثانية</th>
+                    <th>الاستخدام الشائع</th>
+                  </tr>
+                </thead>
+                <tbody class="tabular">
+                  <tr>
+                    <td dir="ltr">150 CFM</td>
+                    <td dir="ltr">255 m³/h</td>
+                    <td dir="ltr">71 L/s</td>
+                    <td>دورة مياه مفردة أو مكتب (<a href="https://www.cloudventsa.com/ar/bathroom-exhaust-fan" target="_blank" rel="noopener">مراوح الحمامات</a> / <a href="https://www.cloudventsa.com/ar/kdk-exhaust-fan" target="_blank" rel="noopener">KDK</a>)</td>
+                  </tr>
+                  <tr>
+                    <td dir="ltr">500 CFM</td>
+                    <td dir="ltr">850 m³/h</td>
+                    <td dir="ltr">236 L/s</td>
+                    <td>غرفة تجهيز أو دكت تجاري (<a href="https://www.cloudventsa.com/ar/inline-fan" target="_blank" rel="noopener">مراوح داخل الدكت</a>)</td>
+                  </tr>
+                  <tr>
+                    <td dir="ltr">2,000 CFM</td>
+                    <td dir="ltr">3,398 m³/h</td>
+                    <td dir="ltr">944 L/s</td>
+                    <td>ورشة عمل أو مستودع صغير (<a href="https://www.cloudventsa.com/ar/wall-mounted-fan" target="_blank" rel="noopener">المراوح الجدارية</a>)</td>
+                  </tr>
+                  <tr>
+                    <td dir="ltr">5,000 CFM</td>
+                    <td dir="ltr">8,495 m³/h</td>
+                    <td dir="ltr">2,360 L/s</td>
+                    <td>هود مطبخ تجاري (<a href="https://www.cloudventsa.com/ar/roof-fan" target="_blank" rel="noopener">مراوح الأسطح RCU</a>)</td>
+                  </tr>
+                  <tr>
+                    <td dir="ltr">12,000 CFM</td>
+                    <td dir="ltr">20,388 m³/h</td>
+                    <td dir="ltr">5,663 L/s</td>
+                    <td>مصنع أو مستودع كبير (<a href="https://www.cloudventsa.com/ar/roof-fan" target="_blank" rel="noopener">RCD / DWT</a>)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Static Pressure & Duty Point -->
+    <section class="section" id="static-pressure">
+      <div class="container">
+        <div class="section__header">
+          <h2>الضغط الساكن ونقطة التشغيل الفعلية (Duty Point)</h2>
+          <p>تتقاطع قدرة المروحة مع مقاومة شبكة الدكت عند نقطة واحدة تُسمى «نقطة التشغيل».</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="diagram-wrap">
+            <h3 style="margin-top:0;">منحنى المروحة مقابل منحنى مقاومة الدكت</h3>
+            <svg viewBox="0 0 520 300" role="img" aria-label="رسم توضيحي لنقطة التشغيل بين منحنى المروحة ومنحنى مقاومة النظام" style="width:100%; height:auto; display:block;" dir="ltr">
+              <rect x="0" y="0" width="520" height="300" fill="#ffffff"/>
+              <line x1="60" y1="250" x2="490" y2="250" stroke="#0f172a" stroke-width="2"/>
+              <line x1="60" y1="25" x2="60" y2="250" stroke="#0f172a" stroke-width="2"/>
+              <line x1="60" y1="190" x2="490" y2="190" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+              <line x1="60" y1="130" x2="490" y2="130" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+              <line x1="60" y1="70" x2="490" y2="70" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+              <path d="M 60 55 C 165 62, 315 118, 445 250" fill="none" stroke="#d9251d" stroke-width="3.5"/>
+              <path d="M 60 250 Q 250 232, 415 55" fill="none" stroke="#0f172a" stroke-width="3" stroke-dasharray="7 5"/>
+              <line x1="286" y1="137" x2="286" y2="250" stroke="#94a3b8" stroke-dasharray="3 3"/>
+              <line x1="60" y1="137" x2="286" y2="137" stroke="#94a3b8" stroke-dasharray="3 3"/>
+              <circle cx="286" cy="137" r="7" fill="#d9251d" stroke="#ffffff" stroke-width="2"/>
+              <circle cx="445" cy="250" r="6" fill="#0f172a"/>
+              <text x="275" y="280" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="600">Airflow (CFM / m³/h)</text>
+              <text x="22" y="140" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="600" transform="rotate(-90 22 140)">Static Pressure (Pa)</text>
+              <text x="298" y="128" font-size="12" fill="#d9251d" font-weight="700">Duty Point</text>
+              <text x="298" y="144" font-size="11" fill="#475569">(CFM @ Pa)</text>
+              <text x="415" y="236" text-anchor="middle" font-size="11" fill="#0f172a" font-weight="700">Free-Air (0 Pa)</text>
+              <text x="125" y="50" font-size="12" fill="#d9251d" font-weight="600">Fan Curve</text>
+              <text x="348" y="62" font-size="11" fill="#0f172a" font-weight="600">System Curve</text>
+            </svg>
+          </div>
+
+          <div class="card">
+            <h3>مصادر فقد الضغط الساكن في المشاريع</h3>
+            <p>
+              يُقاس <strong>الضغط الساكن</strong> بوحدة <strong>باسكال (Pa)</strong> أو <strong>بوصة عمود ماء (in. wg)</strong> حيث يعادل <code>1 in. wg &approx; 249 Pa</code>. كلما زادت المقاومة، انخفض التدفق الفعلي مقارنة بالتدفق الحر:
+            </p>
+            <ul>
+              <li><strong>الشترات ومخمدات عدم الارتداد:</strong> تضيف عادةً 20–50 باسكال.</li>
+              <li><strong>الدكت المستقيم:</strong> حوالي 1–3 باسكال لكل متر عند السرعات القياسية.</li>
+              <li><strong>الأكواع 90&deg; وأغطية الطقس:</strong> 25–75 باسكال لكل قطعة حسب نصف القطر.</li>
+              <li><strong>فلاتر الزيوت وهود المطابخ:</strong> 125–300+ باسكال وتزيد مع تراكم الدهون.</li>
+              <li><strong>فلاتر الغبار والـ HEPA:</strong> 100–400+ باسكال حسب حالة الفلتر.</li>
+            </ul>
+            <p style="margin-bottom:0;">
+              للأنظمة ذات المقاومة الأعلى من 150 باسكال يُنصح بمراوح الطرد المركزي مثل
+              <a href="https://www.cloudventsa.com/ar/centrifugal-blower" target="_blank" rel="noopener">منافيخ الطرد المركزي</a>
+              أو <a href="https://www.cloudventsa.com/ar/inline-fan" target="_blank" rel="noopener">مراوح الطرد المركزي داخل الدكت</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 60Hz Saudi Power & Drive Selection -->
+    <section class="section section--alt" id="saudi-60hz">
+      <div class="container">
+        <div class="section__header">
+          <h2>متطلبات كهرباء 60 هرتز ونوع التشغيل في السعودية</h2>
+          <p>تجنّب احتراق المحركات واختلاف التدفق عند التوريد للمشاريع السعودية.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. التردد (60 هرتز مقابل 50 هرتز)</h3>
+            <p>
+              تعمل الشبكة الكهربائية في السعودية بتردد <strong>60 هرتز</strong>. وفق قوانين التشابه للمراوح، زيادة التردد من 50 إلى 60 هرتز ترفع السرعة بنحو 20% وترفع القدرة المسحوبة بنحو <strong>73%</strong>. لذلك يجب عدم تركيب مروحة غير معتمدة لـ 60 هرتز دون مطابقة منحنى الأداء ولوحة المحرك.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>2. الجهد والأطوار في المملكة</h3>
+            <p>
+              تتوفر المراوح الخفيفة والتجارية (مثل <a href="https://www.cloudventsa.com/ar/kdk-exhaust-fan" target="_blank" rel="noopener">مراوح شفط KDK</a> و<a href="https://www.cloudventsa.com/ar/tat-exhaust-fan" target="_blank" rel="noopener">TAT</a>) بجهد <strong>220–240 فولت / 1 فاز / 60 هرتز</strong>، بينما تعتمد المراوح الصناعية الكبيرة ومراوح الأسطح على <strong>380–400 فولت / 3 فاز / 60 هرتز</strong>.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>3. الدفع المباشر مقابل السير (Belt-Drive)</h3>
+            <p>
+              <strong>الدفع المباشر (Direct-Drive)</strong> يقلل أعمال الصيانة في حرارة الأسطح لعدم وجود سيور وبكرات. أما <strong>الدفع بالسير (Belt-Drive)</strong> فيسمح بتعديل السرعة أثناء الموازنة (T&amp;C) ويبعد المحرك عن تيار الهواء الساخن أو الدهني في المطابخ.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Selector -->
+    <section class="section" id="fan-selector">
+      <div class="container">
+        <div class="section__header">
+          <h2>مُحدد نوع المروحة المناسب لنقطة التشغيل</h2>
+          <p>اختر مكان التركيب وطبيعة الهواء والجهد الكهربائي لمعرفة السلسلة الأنسب من سحابة الكهرباء.</p>
+        </div>
+
+        <div class="calc-layout">
+          <div class="card">
+            <div class="form-grid">
+              <div class="form-group form-group--full">
+                <label for="selMount">1. مكان التركيب</label>
+                <select id="selMount" class="form-control">
+                  <option value="roof" selected>على السطح (Rooftop Curb)</option>
+                  <option value="wall">فتحة جدارية خارجية</option>
+                  <option value="inline">داخل مجرى الهواء (الدكت)</option>
+                  <option value="ceiling">سقف مستعار / أسقف مستودعات عالية</option>
+                  <option value="industrial">أرضي / قاعدة صناعية بضغط ساكن عالٍ</option>
+                  <option value="portable">متنقل / أماكن مغلقة وصيانة</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="selEnv">2. طبيعة الهواء والمقاومة</label>
+                <select id="selEnv" class="form-control">
+                  <option value="general" selected>هواء عام / تهوية قياسية</option>
+                  <option value="highstatic">دكت طويل / ضغط ساكن عالٍ</option>
+                  <option value="grease">زيوت وأبخرة مطابخ تجارية</option>
+                  <option value="dust">حرارة مستودعات / غبار / مزارع</option>
+                  <option value="smoke">حرارة عالية / سحب دخان</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="selPower">3. مصدر الكهرباء المتوفر (60 هرتز)</label>
+                <select id="selPower" class="form-control">
+                  <option value="3ph" selected>380–400 فولت، 3 فاز، 60 هرتز</option>
+                  <option value="1ph">220–240 فولت، 1 فاز، 60 هرتز</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-panel" aria-live="polite">
+            <h3>الفئة المقترحة</h3>
+            <div class="rec-box">
+              <strong id="selTitle" style="font-size:1.08rem; color:#fca5a5;">—</strong>
+              <p id="selDesc" style="margin:8px 0 0; color:#cbd5e1;">—</p>
+            </div>
+            <a id="selLink" class="btn btn-primary" href="https://www.cloudventsa.com/ar/roof-fan" target="_blank" rel="noopener">عرض الموديلات في سحابة الكهرباء &larr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checklist -->
+    <section class="section section--alt" id="checklist">
+      <div class="container">
+        <div class="section__header">
+          <h2>قائمة البيانات المطلوبة لتسعير وتوريد المراوح بسرعة</h2>
+          <p>تجهيز هذه النقاط الست يختصر وقت المراجعة الهندسية وإصدار الاعتمادات الفنية (Submittals) وعروض الأسعار.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. كمية الهواء المطلوبة</h3>
+            <p>تحديد التدفق بوحدة <strong>CFM</strong> أو <strong>م³/ساعة</strong> (أو إرسال أبعاد الموقع للمساعدة في الحساب).</p>
+          </div>
+          <div class="card">
+            <h3>2. الضغط الساكن</h3>
+            <p>ذكر الضغط المطلوب بالباسكال (Pa) أو البوصة المائية، أو وصف طول الدكت والفلاتر.</p>
+          </div>
+          <div class="card">
+            <h3>3. التطبيق ونوع الهواء</h3>
+            <p>توضيح إن كان الهواء نظيفاً، حاراً، محملاً بالزيوت (مطابخ)، رطوبة (حمامات)، أو دخاناً.</p>
+          </div>
+          <div class="card">
+            <h3>4. التركيب والمقاس</h3>
+            <p>تحديد التركيب (سقفي، جداري، دكت، أرضي) ومقاس الفتحة أو قطر الدكت بالمليمتر/البوصة.</p>
+          </div>
+          <div class="card">
+            <h3>5. المواصفات الكهربائية (60 هرتز)</h3>
+            <p>تأكيد 220–240 فولت (1 فاز) أو 380–400 فولت (3 فاز) بتردد <strong>60 هرتز</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>6. الكمية ومدينة المشروع</h3>
+            <p>عدد الوحدات وموقع التسليم في المملكة (الرياض، جدة، الدمام، الخبر، الجبيل، ينبع، مكة، المدينة).</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>لطلب عرض سعر أو اعتماد فني (Submittal):</strong> تواصل مع مؤسسة سحابة الكهرباء للتجارة عبر
+          <a href="https://www.cloudventsa.com/ar/contact" target="_blank" rel="noopener">نموذج التواصل الرسمي</a>
+          أو <a href="https://wa.me/966562598137" target="_blank" rel="noopener">مبيعات واتساب (+966 56 259 8137)</a>
+          أو البريد <a href="mailto:sales@cloudventsa.com">sales@cloudventsa.com</a>.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__header">
+          <h2>الأسئلة الشائعة حول تحديد مقاس المراوح</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>لماذا يُعد رقم التدفق الحر (Free-Air CFM) مضللاً عند اختيار مروحة الشفط؟</summary>
+            <p>التدفق الحر يُقاس عند ضغط ساكن يساوي صفراً بدون أي مجاري هواء (دكت) أو شترات أو فلاتر. عند تركيب المروحة في الموقع الفعلي، تقل كمية الهواء الخارجة بسبب مقاومة الدكت والفلاتر. لذلك يجب دائماً التحقق من التدفق عند الضغط الساكن المطلوب.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>كيف يتم تحويل وحدة CFM إلى متر مكعب في الساعة (م³/ساعة) ولتر في الثانية؟</summary>
+            <p>اضرب قيمة CFM في <code dir="ltr">1.699</code> للحصول على متر مكعب في الساعة (م³/ساعة)، أو اضرب CFM في <code dir="ltr">0.47195</code> للحصول على لتر في الثانية (L/s). وللتحويل العكسي اقسم م³/ساعة على <code dir="ltr">1.699</code>.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>لماذا يؤثر تردد الكهرباء 60 هرتز في السعودية على أداء المروحة؟</summary>
+            <p>تعمل شبكة الكهرباء في المملكة العربية السعودية بتردد 60 هرتز (220–240 فولت أحادي الطور أو 380–400 فولت ثلاثي الطور). تشغيل مروحة مصممة لـ 50 هرتز فقط على 60 هرتز يرفع سرعة الدوران بنحو 20% ويزيد استهلاك القدرة بنسبة قد تؤدي إلى احتراق المحرك، لذا يجب التأكد من منحنى الأداء على 60 هرتز.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>ما الفرق بين مروحة السطح للدفع للأعلى (Upblast) وللأسفل (Downblast) في المطابخ؟</summary>
+            <p>للمطابخ التجارية يجب دائماً استخدام مروحة دفع للأعلى مخصصة للزيوت (مثل <a href="https://www.cloudventsa.com/ar/kitchen-exhaust-fan" target="_blank" rel="noopener">مراوح شفط المطابخ</a> / RCU) لطرد الأبخرة والدهون عمودياً بعيداً عن عازل السطح ومنع تجمع الزيوت.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="section section--alt" id="references">
+      <div class="container">
+        <div class="card">
+          <h2 style="margin-top:0;">المراجع العلمية وبيانات المورّد الرسمية</h2>
+          <ul>
+            <li><strong>مراجع معدل التدفق ووحدة CFM:</strong> <a href="https://ar.wikipedia.org/wiki/%D9%85%D8%B9%D8%AF%D9%84_%D8%A7%D9%84%D8%AA%D8%AF%D9%81%D9%82_%D8%A7%D9%84%D8%AD%D8%AC%D9%85%D9%8A" target="_blank" rel="noopener noreferrer">معدل التدفق الحجمي — ويكيبيديا العربية</a> و<a href="https://en.wikipedia.org/wiki/Cubic_foot" target="_blank" rel="noopener noreferrer">مرجع CFM (Cubic foot) — ويكيبيديا الإنجليزية</a>.</li>
+            <li><strong>الجهة المورّدة:</strong> سحابة الكهرباء (<strong>مؤسسة سحابة الكهرباء للتجارة</strong>) &middot; خبرة تتجاوز 20 عاماً في توريد مراوح الشفط والتهوية الصناعية في السعودية.</li>
+            <li><strong>البيانات الرسمية:</strong> السجل التجاري: <a href="https://mc.gov.sa/EN/ESERVICES/pages/ServiceDetails.aspx?sID=91" target="_blank" rel="noopener noreferrer">1010814785</a> &middot; الرقم الضريبي: <a href="https://zatca.gov.sa/en/eServices/Pages/eservices-007.aspx" target="_blank" rel="noopener noreferrer">311357535300003</a> &middot; الرقم الموحد: 7030019405.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dark Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>سحابة الكهرباء</h3>
+          <p style="margin:0 0 10px;">توريد مراوح شفط وتهوية صناعية للمقاولين والمصانع والمستودعات والمنشآت ومشتري المشاريع في المملكة العربية السعودية.</p>
+          <p style="margin:0; font-size:0.84rem; color:var(--ink-light);">
+            مؤسسة سحابة الكهرباء للتجارة<br>
+            السجل التجاري 1010814785 &middot; الرقم الضريبي 311357535300003
+          </p>
+        </div>
+
+        <div>
+          <h3>أقسام المنتجات</h3>
+          <ul>
+            <li><a href="https://www.cloudventsa.com/ar/roof-fan" target="_blank" rel="noopener">مراوح الشفط للأسطح</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/wall-mounted-fan" target="_blank" rel="noopener">مراوح الشفط الجدارية</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/inline-fan" target="_blank" rel="noopener">مراوح الشفط داخل الدكت</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/centrifugal-blower" target="_blank" rel="noopener">منافيخ الطرد المركزي</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/hvls-ceiling-fan" target="_blank" rel="noopener">مراوح سقفية HVLS</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/kitchen-exhaust-fan" target="_blank" rel="noopener">مراوح شفط المطابخ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>علامات وأقسام أخرى</h3>
+          <ul>
+            <li><a href="https://www.cloudventsa.com/ar/fresh-air-fan" target="_blank" rel="noopener">مراوح تغذية الهواء النقي</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/portable-exhaust-fan" target="_blank" rel="noopener">مراوح الشفط المتنقلة</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/kdk-exhaust-fan" target="_blank" rel="noopener">مراوح شفط KDK</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/tat-exhaust-fan" target="_blank" rel="noopener">مراوح شفط TAT</a></li>
+            <li><a href="https://www.cloudventsa.com/ar/about-us" target="_blank" rel="noopener">من نحن</a></li>
+            <li><a href="../">English Version</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>المقر الرئيسي — الرياض</h3>
+          <ul>
+            <li>8035 العادل الواعظ، حي الأمل، الرياض 12643، المملكة العربية السعودية</li>
+            <li><a href="tel:+966562598137" dir="ltr">+966 56 259 8137</a></li>
+            <li><a href="mailto:sales@cloudventsa.com">sales@cloudventsa.com</a></li>
+            <li>
+              <a href="https://www.linkedin.com/company/cloudelectricalsa" target="_blank" rel="noopener">LinkedIn</a> &middot;
+              <a href="https://www.facebook.com/cloudelectricalsa" target="_blank" rel="noopener">Facebook</a> &middot;
+              <a href="https://www.instagram.com/cloudelectricalsa/" target="_blank" rel="noopener">Instagram</a> &middot;
+              <a href="https://x.com/cloudventsa" target="_blank" rel="noopener">X</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>حقوق النشر 2026 سحابة الكهرباء (مؤسسة سحابة الكهرباء للتجارة).</span>
+        <span><a href="#top">العودة إلى الأعلى &uarr;</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/calculator.js"></script>
+</body>
+</html>

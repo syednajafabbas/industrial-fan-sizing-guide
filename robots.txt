@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://syednajafabbas.github.io/industrial-fan-sizing-guide/sitemap.xml
