@@ -1,7 +1,6 @@
 /**
- * Cloud Electrical Co. — Industrial Fan Sizing & Duty-Point Calculator
- * Supports English (en) and Arabic (ar) pages with real unit conversions
- * and KSA 60Hz application presets.
+ * Interactive tabs, CFM/ACH duty calculator, unit converter, and fan selector.
+ * Clean, lightweight client-side logic for EN and AR pages.
  */
 (function () {
   "use strict";
@@ -10,44 +9,43 @@
   var CFM_TO_M3H = 1.6990108;
   var CFM_TO_LS = 0.47194745;
   var INWG_TO_PA = 249.0889;
-
   var BASE_URL = lang === "ar" ? "https://www.cloudventsa.com/ar" : "https://www.cloudventsa.com";
 
   var PRESETS = {
-    kitchen: {
-      ach: 30,
-      enName: "Commercial Kitchen / Hood Exhaust",
-      arName: "مطبخ تجاري / شفط هود المطابخ",
-      links: [
-        { path: "/kitchen-exhaust-fan", en: "Kitchen Exhaust Fans", ar: "مراوح شفط المطابخ" },
-        { path: "/roof-fan/upblast-roof-fan", en: "RCU Upblast Roof Fan", ar: "مروحة سقفية RCU دفع للأعلى" },
-        { path: "/fresh-air-fan", en: "Fresh Air Make-Up Fans", ar: "مراوح تغذية الهواء النقي" }
-      ]
-    },
     warehouse: {
       ach: 10,
-      enName: "Warehouse / Logistics Center",
+      enName: "Warehouse / Logistics",
       arName: "مستودع / مركز لوجستي",
       links: [
         { path: "/hvls-ceiling-fan", en: "HVLS Ceiling Fans", ar: "مراوح سقفية HVLS" },
-        { path: "/roof-fan/downblast-roof-fan", en: "RCD Downblast Roof Fan", ar: "مروحة سقفية RCD" },
-        { path: "/roof-fan/axial-roof-fan", en: "DWT Axial Roof Fan", ar: "مروحة سقفية محورية DWT" }
+        { path: "/roof-fan/downblast-roof-fan", en: "Downblast Roof Fans", ar: "مراوح الشفط للأسطح" },
+        { path: "/roof-fan/axial-roof-fan", en: "Axial Roof Fans", ar: "مراوح الأسطح المحورية" }
       ]
     },
     factory: {
       ach: 18,
-      enName: "Factory / Welding / Heat Workshop",
-      arName: "مصنع / ورشة / إزالة حرارة وأدخنة",
+      enName: "Factory / Workshop",
+      arName: "مصنع / ورشة عمل",
       links: [
-        { path: "/wall-mounted-fan/wall-mounted-shutter-exhaust-fan", en: "Hammer Wall Shutter Fan", ar: "مروحة جدارية بشتر Hammer" },
-        { path: "/roof-fan/upblast-roof-fan", en: "RCU Upblast Roof Fan", ar: "مروحة سقفية RCU" },
+        { path: "/wall-mounted-fan/wall-mounted-shutter-exhaust-fan", en: "Wall Shutter Fans", ar: "مراوح جدارية بشتر" },
+        { path: "/roof-fan/upblast-roof-fan", en: "Upblast Roof Fans", ar: "مراوح أسطح للدفع للأعلى" },
         { path: "/centrifugal-blower", en: "Centrifugal Blowers", ar: "منافيخ الطرد المركزي" }
+      ]
+    },
+    kitchen: {
+      ach: 30,
+      enName: "Commercial Kitchen",
+      arName: "مطبخ تجاري",
+      links: [
+        { path: "/kitchen-exhaust-fan", en: "Kitchen Exhaust Fans", ar: "مراوح شفط المطابخ" },
+        { path: "/roof-fan/upblast-roof-fan", en: "RCU Upblast Roof Fan", ar: "مروحة سقفية للمطابخ RCU" },
+        { path: "/fresh-air-fan", en: "Fresh Air Fans", ar: "مراوح تغذية الهواء النقي" }
       ]
     },
     washroom: {
       ach: 12,
-      enName: "Commercial Washroom / Restroom",
-      arName: "دورات مياه تجارية",
+      enName: "Washroom / Restroom",
+      arName: "دورات مياه",
       links: [
         { path: "/bathroom-exhaust-fan", en: "Bathroom Exhaust Fans", ar: "مراوح شفط الحمامات" },
         { path: "/inline-fan", en: "Inline Duct Fans", ar: "مراوح الشفط داخل الدكت" },
@@ -56,8 +54,8 @@
     },
     office: {
       ach: 6,
-      enName: "Office / Retail / Corridor Ventilation",
-      arName: "مكاتب / معارض / ممرات تجارية",
+      enName: "Office / Commercial",
+      arName: "مكتب / معرض تجاري",
       links: [
         { path: "/ceiling-exhaust-fan", en: "Ceiling Exhaust Fans", ar: "مراوح الشفط السقفية" },
         { path: "/inline-fan", en: "Inline Duct Fans", ar: "مراوح داخل الدكت" },
@@ -66,39 +64,30 @@
     },
     electrical: {
       ach: 20,
-      enName: "Mechanical / Electrical / Generator Room",
-      arName: "غرفة كهرباء / ميكانيكا / مولدات",
+      enName: "Electrical / Mechanical Room",
+      arName: "غرفة كهرباء / ميكانيكا",
       links: [
-        { path: "/wall-mounted-fan", en: "Wall Mounted Exhaust Fans", ar: "مراوح الشفط الجدارية" },
+        { path: "/wall-mounted-fan", en: "Wall Mounted Fans", ar: "مراوح الشفط الجدارية" },
         { path: "/centrifugal-blower", en: "Centrifugal Blowers", ar: "منافيخ الطرد المركزي" },
-        { path: "/inline-fan/axial-inline-fan", en: "VMD-A Axial Inline Fan", ar: "مروحة محورية داخل الدكت VMD-A" }
+        { path: "/inline-fan/axial-inline-fan", en: "Axial Inline Fans", ar: "مراوح محورية داخل الدكت" }
       ]
     },
     poultry: {
       ach: 40,
-      enName: "Poultry House / Greenhouse (Tunnel Ventilation)",
-      arName: "مزارع دواجن / بيوت محمية",
+      enName: "Poultry / Greenhouse",
+      arName: "مزرعة دواجن / بيت محمي",
       links: [
-        { path: "/wall-mounted-fan/wall-mounted-shutter-exhaust-fan", en: "Hammer Shutter Exhaust Fan", ar: "مروحة جدارية بشتر Hammer" },
-        { path: "/wall-mounted-fan", en: "Wall Mounted Exhaust Fans", ar: "مراوح الشفط الجدارية" }
-      ]
-    },
-    confined: {
-      ach: 25,
-      enName: "Construction / Confined Space Purge",
-      arName: "مواقع بناء / تهوية أماكن مغلقة",
-      links: [
-        { path: "/portable-exhaust-fan", en: "Portable Exhaust Fans", ar: "مراوح الشفط المتنقلة" },
-        { path: "/portable-exhaust-fan/portable-ventilator-blower-fan", en: "Portable Ventilator Blower", ar: "منفاخ تهوية متنقل" }
+        { path: "/wall-mounted-fan/wall-mounted-shutter-exhaust-fan", en: "Hammer Shutter Fans", ar: "مراوح جدارية بشتر Hammer" },
+        { path: "/wall-mounted-fan", en: "Wall Exhaust Fans", ar: "مراوح الشفط الجدارية" }
       ]
     }
   };
 
   var PRESSURE_BANDS = {
-    free: { minPa: 25, maxPa: 75, en: "Free-discharge (wall louver / roof curb, no duct)", ar: "طرد مباشر (جداري/سقفي بدون دكت)" },
-    short: { minPa: 100, maxPa: 220, en: "Short duct run (< 10 m, 1–2 elbows)", ar: "دكت قصير (أقل من 10 م، 1–2 كوع)" },
-    medium: { minPa: 250, maxPa: 450, en: "Medium duct network (branches + grille/damper)", ar: "شبكة دكت متوسطة (تفرعات + مخمد)" },
-    high: { minPa: 500, maxPa: 900, en: "High static (kitchen hood, grease filters, long duct)", ar: "ضغط ساكن عالٍ (هود مطبخ، فلاتر، دكت طويل)" }
+    free: { minPa: 25, maxPa: 75 },
+    short: { minPa: 100, maxPa: 220 },
+    medium: { minPa: 250, maxPa: 450 },
+    high: { minPa: 500, maxPa: 900 }
   };
 
   function byId(id) {
@@ -112,6 +101,24 @@
     });
   }
 
+  function setupTabs() {
+    var buttons = document.querySelectorAll("[role='tab']");
+    var panels = document.querySelectorAll("[role='tabpanel']");
+    if (!buttons.length) return;
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var targetId = btn.getAttribute("aria-controls");
+        buttons.forEach(function (b) {
+          b.setAttribute("aria-selected", b === btn ? "true" : "false");
+        });
+        panels.forEach(function (p) {
+          p.hidden = p.id !== targetId;
+        });
+      });
+    });
+  }
+
   function updateSizing() {
     var unitEl = byId("unitSystem");
     var lenEl = byId("roomLength");
@@ -122,9 +129,7 @@
     var ductEl = byId("ductType");
     var marginEl = byId("safetyMargin");
 
-    if (!unitEl || !lenEl || !widEl || !hgtEl || !appEl || !achEl || !ductEl || !marginEl) {
-      return;
-    }
+    if (!unitEl || !lenEl || !widEl || !hgtEl || !appEl || !achEl || !ductEl || !marginEl) return;
 
     var isMetric = unitEl.value === "m";
     var l = Math.max(0.5, parseFloat(lenEl.value) || 0);
@@ -148,8 +153,7 @@
     byId("outCfm").textContent = formatNum(Math.round(designCfm), 0) + " CFM";
     byId("outM3h").textContent = formatNum(Math.round(designM3h), 0) + " m³/h";
     byId("outLs").textContent = formatNum(Math.round(designLs), 0) + " L/s";
-    byId("outVolume").textContent =
-      formatNum(volM3, 1) + " m³ (" + formatNum(Math.round(volFt3), 0) + " ft³)";
+    byId("outVolume").textContent = formatNum(volM3, 1) + " m³";
     byId("outPressure").textContent =
       band.minPa + "–" + band.maxPa + " Pa (" + minInWg.toFixed(2) + "–" + maxInWg.toFixed(2) + " in. wg)";
 
@@ -158,7 +162,7 @@
     recContainer.innerHTML = "";
     preset.links.forEach(function (item) {
       var a = document.createElement("a");
-      a.className = "rec-chip";
+      a.className = "chip";
       a.href = BASE_URL + item.path;
       a.target = "_blank";
       a.rel = "noopener";
@@ -171,7 +175,7 @@
       var appLabel = lang === "ar" ? preset.arName : preset.enName;
       var msg =
         lang === "ar"
-          ? "مرحباً سحابة الكهرباء، أحتاج عرض سعر لمروحة بنقطة تشغيل: " +
+          ? "طلب تسعير مروحة — نقطة التشغيل: " +
             Math.round(designCfm) +
             " CFM (" +
             Math.round(designM3h) +
@@ -181,8 +185,8 @@
             band.maxPa +
             " باسكال، التطبيق: " +
             appLabel +
-            " (تردد 60 هرتز)."
-          : "Hello Cloud Electrical, I need a fan quotation for duty point: " +
+            " (60 هرتز)."
+          : "Fan Duty Quote Request: " +
             Math.round(designCfm) +
             " CFM (" +
             Math.round(designM3h) +
@@ -208,9 +212,7 @@
 
     appEl.addEventListener("change", function () {
       var preset = PRESETS[appEl.value];
-      if (preset) {
-        achEl.value = preset.ach;
-      }
+      if (preset) achEl.value = preset.ach;
       updateSizing();
     });
 
@@ -226,8 +228,10 @@
 
     ["roomLength", "roomWidth", "roomHeight", "customAch", "ductType", "safetyMargin"].forEach(function (id) {
       var el = byId(id);
-      if (el) el.addEventListener("input", updateSizing);
-      if (el) el.addEventListener("change", updateSizing);
+      if (el) {
+        el.addEventListener("input", updateSizing);
+        el.addEventListener("change", updateSizing);
+      }
     });
 
     var copyBtn = byId("copySpecBtn");
@@ -236,17 +240,15 @@
     if (copyBtn && waBtn) {
       copyBtn.addEventListener("click", function () {
         var text = waBtn.dataset.summary || "";
-        if (!text) return;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(function () {
-            if (feedback) {
-              feedback.textContent = lang === "ar" ? "تم نسخ مواصفات نقطة التشغيل." : "Duty-point summary copied to clipboard.";
-              setTimeout(function () {
-                feedback.textContent = "";
-              }, 3000);
-            }
-          });
-        }
+        if (!text || !navigator.clipboard || !navigator.clipboard.writeText) return;
+        navigator.clipboard.writeText(text).then(function () {
+          if (feedback) {
+            feedback.textContent = lang === "ar" ? "تم نسخ الملخص." : "Copied to clipboard.";
+            setTimeout(function () {
+              feedback.textContent = "";
+            }, 3000);
+          }
+        });
       });
     }
 
@@ -311,97 +313,89 @@
       var power = powerEl.value;
 
       var rec = {
-        enTitle: "RCD / DWT Roof Exhaust Series",
-        arTitle: "سلسلة مراوح الأسطح RCD / DWT",
-        enDesc: "Best suited for general roof ventilation with low-to-medium static pressure. Verify 60Hz motor nameplate.",
-        arDesc: "مناسبة لتهوية الأسطح العامة عند ضغط ساكن منخفض إلى متوسط مع التحقق من لوحة محرك 60 هرتز.",
+        enTitle: "Downblast / Axial Roof Fan (RCD / DWT)",
+        arTitle: "مروحة سقفية للأسطح (RCD / DWT)",
+        enDesc: "Ideal for general warehouse or commercial roof exhaust at low-to-medium static pressure.",
+        arDesc: "مناسبة لتهوية أسطح المستودعات والمباني التجارية عند ضغط ساكن منخفض إلى متوسط.",
         path: "/roof-fan"
       };
 
-      if (env === "grease" || (mount === "roof" && env === "grease")) {
+      if (env === "grease") {
         rec = {
-          enTitle: "RCU Upblast Centrifugal Roof Fan",
-          arTitle: "مروحة سقفية طرد مركزي للدفع للأعلى RCU",
-          enDesc: "Discharges grease-laden kitchen exhaust vertically away from roof surfaces; compatible with high static hood ducts.",
-          arDesc: "تطرد أبخرة وزيوت المطابخ عمودياً بعيداً عن سطح المبنى وتتحمل الضغط الساكن العالي لمداخن المطابخ.",
+          enTitle: "Upblast Centrifugal Roof Fan (RCU)",
+          arTitle: "مروحة سقفية دفع للأعلى للمطابخ (RCU)",
+          enDesc: "Discharges kitchen grease exhaust vertically away from the roof and handles hood/filter static pressure.",
+          arDesc: "تطرد أبخرة وزيوت المطابخ عمودياً بعيداً عن السطح وتتحمل مقاومة الفلاتر والهود.",
           path: "/roof-fan/upblast-roof-fan"
         };
       } else if (mount === "roof" && env === "highstatic") {
         rec = {
-          enTitle: "RC-A Centrifugal Roof Fan",
-          arTitle: "مروحة سقفية طرد مركزي RC-A",
-          enDesc: "Centrifugal impeller handles ducted roof exhaust where axial fans would stall against static pressure.",
-          arDesc: "ريشة طرد مركزي مناسبة للشفط عبر مجاري الهواء على الأسطح حيث تفقد المراوح المحورية كفاءتها.",
+          enTitle: "Centrifugal Roof Fan (RC-A)",
+          arTitle: "مروحة سقفية طرد مركزي (RC-A)",
+          enDesc: "Backward-curved centrifugal wheel maintains airflow through ducted rooftop risers.",
+          arDesc: "ريشة طرد مركزي تحافظ على التدفق عند ربط المروحة بشبكة دكت.",
           path: "/roof-fan/centrifugal-roof-fan"
-        };
-      } else if (mount === "roof") {
-        rec = {
-          enTitle: "RCD Downblast / DWT Axial Roof Fan",
-          arTitle: "مروحة سقفية RCD / محورية DWT",
-          enDesc: "High-airflow roof exhaust for warehouses, factories, and commercial buildings without heavy grease.",
-          arDesc: "تدفق هواء عالٍ لتهوية المستودعات والمصانع والمباني التجارية غير المحتوية على دهون.",
-          path: "/roof-fan/downblast-roof-fan"
         };
       } else if (mount === "wall") {
         rec = {
-          enTitle: env === "dust" ? "Hammer Wall Mounted Shutter Exhaust Fan" : "Wall Mounted Exhaust Fan with Damper / KDK / TAT",
-          arTitle: env === "dust" ? "مروحة جدارية بشتر ثقيل Hammer" : "مروحة جدارية مع مخمد / KDK / TAT",
-          enDesc: "Direct wall discharge with automatic gravity shutters to block dust and backdrafts when idle.",
-          arDesc: "طرد جداري مباشر مع شتر تلقائي لمنع دخول الغبار وارتداد الهواء عند التوقف.",
+          enTitle: env === "dust" ? "Wall Mounted Shutter Fan (Hammer)" : "Wall Exhaust Fan with Damper / KDK / TAT",
+          arTitle: env === "dust" ? "مروحة جدارية بشتر ثقيل (Hammer)" : "مروحة جدارية مع مخمد / KDK / TAT",
+          enDesc: "Direct wall discharge with gravity shutters that close against dust and backdrafts.",
+          arDesc: "طرد جداري مباشر مع شتر تلقائي يمنع دخول الغبار عند الإيقاف.",
           path: env === "dust" ? "/wall-mounted-fan/wall-mounted-shutter-exhaust-fan" : "/wall-mounted-fan"
         };
       } else if (mount === "inline") {
         if (env === "smoke") {
           rec = {
-            enTitle: "VDO Tube Axial / Smoke Extraction Fan",
-            arTitle: "مروحة أنبوبية محورية VDO لسحب الدخان",
-            enDesc: "Engineered for high-volume ducted extraction and emergency smoke/heat exhaust applications.",
-            arDesc: "مصممة للسحب الأنبوبي عالي التدفق وتطبيقات طرد الدخان والحرارة.",
+            enTitle: "Tube Axial / Smoke Extraction Fan (VDO)",
+            arTitle: "مروحة أنبوبية لسحب الدخان (VDO)",
+            enDesc: "High-volume axial inline unit built for ducted smoke and heat extraction.",
+            arDesc: "مروحة أنبوبية عالية التدفق لتطبيقات سحب الدخان والحرارة عبر الدكت.",
             path: "/inline-fan/vdo-axial-smoke-extraction-fan"
           };
         } else if (env === "highstatic") {
           rec = {
-            enTitle: "CHA Centrifugal Box Inline Fan",
-            arTitle: "مروحة صندوقية طرد مركزي داخل الدكت CHA",
-            enDesc: "Centrifugal box geometry maintains airflow through longer duct branches, filters, and acoustic bends.",
-            arDesc: "تصميم صندوقي بالطرد المركزي يحافظ على التدفق عبر مجاري الهواء الطويلة والفلاتر.",
+            enTitle: "Centrifugal Box Inline Fan (CHA)",
+            arTitle: "مروحة صندوقية داخل الدكت (CHA)",
+            enDesc: "Designed to overcome longer duct runs, acoustic bends, and branch dampers.",
+            arDesc: "مصممة للتغلب على مقاومة الدكت الطويل والأكواع والفلاتر.",
             path: "/inline-fan/centrifugal-box-inline-fan"
           };
         } else {
           rec = {
-            enTitle: "Circular Inline Duct Fan (Plastic / Steel)",
-            arTitle: "مروحة دائرية داخل الدكت (بلاستيك / حديد)",
-            enDesc: "Compact inline duct booster for washrooms, offices, and light commercial supply/exhaust ducts.",
-            arDesc: "حل مدمج داخل الدكت لدورات المياه والمكاتب ومجاري الهواء التجارية الخفيفة.",
+            enTitle: "Circular Inline Duct Fan",
+            arTitle: "مروحة دائرية داخل الدكت",
+            enDesc: "Compact inline fan for washrooms, offices, and light commercial ductwork.",
+            arDesc: "مروحة مدمجة داخل الدكت لدورات المياه والمكاتب والتطبيقات التجارية الخفيفة.",
             path: "/inline-fan"
           };
         }
       } else if (mount === "ceiling") {
         rec = {
-          enTitle: env === "dust" ? "HVLS Industrial Ceiling Fan" : "KDK / TAT Ceiling Cassette Exhaust Fan",
-          arTitle: env === "dust" ? "مروحة سقفية صناعية HVLS" : "مروحة شفط سقفية KDK / TAT",
+          enTitle: env === "dust" ? "HVLS Industrial Ceiling Fan" : "Ceiling Cassette Exhaust Fan (KDK / TAT)",
+          arTitle: env === "dust" ? "مروحة سقفية صناعية HVLS" : "مروحة شفط سقفية (KDK / TAT)",
           enDesc: env === "dust"
-            ? "Large-diameter destratification fan for high-bay warehouses and factories to improve air circulation."
-            : "Quiet ducted ceiling exhaust for offices, clinics, and commercial washrooms.",
+            ? "Large-diameter air circulation for high-bay warehouses and industrial facilities."
+            : "Low-noise ceiling exhaust for washrooms, offices, and false-ceiling grids.",
           arDesc: env === "dust"
-            ? "مروحة بقطر كبير لتحريك وتوزيع الهواء في المستودعات والمصانع ذات الأسقف العالية."
-            : "شفط سقفي هادئ متصل بالدكت للمكاتب والعيادات ودورات المياه التجارية.",
+            ? "تدوير هواء واسع النطاق للمستودعات والمصانع ذات الأسقف المرتفعة."
+            : "شفط سقفي هادئ لدورات المياه والمكاتب والأسقف المستعارة.",
           path: env === "dust" ? "/hvls-ceiling-fan" : "/ceiling-exhaust-fan"
         };
       } else if (mount === "industrial") {
         rec = {
-          enTitle: "DE / CBA Industrial Centrifugal Blower",
-          arTitle: "منفاخ طرد مركزي صناعي DE / CBA",
-          enDesc: "Built for high static pressure industrial processes, dust extraction, and heavy duct resistance.",
-          arDesc: "مخصص للضغوط الساكنة العالية في العمليات الصناعية وسحب الأبخرة ومقاومة الدكت العالية.",
+          enTitle: "Industrial Centrifugal Blower (DE / CBA)",
+          arTitle: "منفاخ طرد مركزي صناعي (DE / CBA)",
+          enDesc: "High static pressure blower for industrial process exhaust and heavy ductwork.",
+          arDesc: "منفاخ للضغوط الساكنة العالية في التطبيقات الصناعية والدكت الثقيل.",
           path: "/centrifugal-blower"
         };
       } else if (mount === "portable") {
         rec = {
           enTitle: "Portable Ventilator Blower / Drum Fan",
-          arTitle: "منفاخ تهوية متنقل / مروحة برميل صناعية",
-          enDesc: "Rapid spot cooling and fresh air purging via flexible ducting for maintenance and confined spaces.",
-          arDesc: "تبريد موضعي سريع وضخ هواء نقي عبر دكت مرن لأعمال الصيانة والأماكن المغلقة.",
+          arTitle: "منفاخ تهوية متنقل / مروحة برميل",
+          enDesc: "Flexible-duct air purge and spot cooling for maintenance and confined spaces.",
+          arDesc: "تهوية مرنة وسريعة لأعمال الصيانة والأماكن المغلقة.",
           path: "/portable-exhaust-fan"
         };
       }
@@ -409,16 +403,15 @@
       var powerNote =
         power === "3ph"
           ? lang === "ar"
-            ? " (تحديد محرك 380–400 فولت / 3 فاز / 60 هرتز)"
-            : " (Specify 380–400V, 3-Phase, 60Hz)"
+            ? " — 380–400 فولت / 3 فاز / 60 هرتز"
+            : " — 380–400V, 3-Phase, 60Hz"
           : lang === "ar"
-          ? " (تحديد محرك 220–240 فولت / 1 فاز / 60 هرتز)"
-          : " (Specify 220–240V, 1-Phase, 60Hz)";
+          ? " — 220–240 فولت / 1 فاز / 60 هرتز"
+          : " — 220–240V, 1-Phase, 60Hz";
 
       outTitle.textContent = (lang === "ar" ? rec.arTitle : rec.enTitle) + powerNote;
       outDesc.textContent = lang === "ar" ? rec.arDesc : rec.enDesc;
       outLink.href = BASE_URL + rec.path;
-      outLink.textContent = lang === "ar" ? "عرض الموديلات في سحابة الكهرباء ←" : "View Matching Models on Cloudventsa →";
     }
 
     [mountEl, envEl, powerEl].forEach(function (el) {
@@ -428,6 +421,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    setupTabs();
     setupSizingCalculator();
     setupConverter();
     setupSelector();
